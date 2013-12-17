@@ -1,0 +1,22 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    network:
+    - [private_network, ip: "10.33.33.10"]
+    customize:
+      cpus: 2
+      memory: 1024
+
+
+suites:
+- name: default
+  run_list: ["recipe[webpage]"]
+  attributes: {}
+ 

@@ -1,7 +1,7 @@
-chef-cucumber-example
+webpage
 =====================
 
-Some tests playing with cucumber-chef
+Is an acceptance test example using chef
 
 
 # Requirements
@@ -13,11 +13,15 @@ Berkshelf
 
 # Usage
   Visit http://www.vagrantup.com/downloads.html or install a vagrant's system package
-  Add vm ip and hostname to hosts file. (you can change hostname in feature description)
+  Add simplewebpage.local to hosts file. This entry should pointed to vm ip.
 
-  Choose one of included proyects and test it!
+  bundle install
+  cucumber
 
+# Attributes
 
+# Recipes
+  chef-cucumber-example
 # Author
 
 Author:: jancorg
