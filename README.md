@@ -21,3 +21,9 @@ Berkshelf
 # Author
 
 Author:: jancorg
+
+
+# Tests
+
+webpage: Simple html deplayment with an aceptance test
+rsyslog-ssl: opscode rsyslog based recipe that adds support for ssl and test coverage. It tests client and server in same test. 
