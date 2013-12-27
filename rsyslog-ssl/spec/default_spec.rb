@@ -20,7 +20,7 @@ describe 'rsyslog-ssl::default' do
 
       @node = node
     end
-    chef_run.converge 'rsyslog-wrapper::default'
+    chef_run.converge 'rsyslog-ssl::default'
   }
 
 
