@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "rsyslog-ssl": {
+      "path": "."
+    },
+    "apt": {
+      "locked_version": "2.1.1"
+    },
+    "rsyslog": {
+      "locked_version": "1.8.0"
+    }
+  }
+}

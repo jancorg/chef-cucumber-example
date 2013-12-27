@@ -1,0 +1,13 @@
+require "bundler/setup"
+
+
+basename = File.basename(Dir.pwd)
+servers={}
+task :default => [:list]
+
+
+desc "Runs chefspec on this cookbook (not depends)"
+task :chefspec do
+    sh "cd cookbooks/#{basename} ; bundle exec rspec -fd ; cd ../.."
+end
+
