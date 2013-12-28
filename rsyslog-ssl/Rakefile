@@ -11,3 +11,40 @@ task :chefspec do
     sh "cd cookbooks/#{basename} ; bundle exec rspec -fd ; cd ../.."
 end
 
+
+
+desc "Test Kitchen server per server moving folders and reading yaml file" 
+ task :test_all do
+  Rake::Task[:read_servers].execute
+
+  integration_tests_dir = "test/integration/default/serverspec"
+  integration_temp_dir = "test/integration/temp/serverspec"
+
+  mkdir_p integration_temp_dir
+  sh "mv #{integration_tests_dir}/* #{integration_temp_dir}" 
+
+  begin
+    mkdir_p integration_temp_dir
+    servers.keys.each do |k|
+      server_dir =  integration_temp_dir + "/" + k
+      
+      puts "--- Verifiying #{k}"
+      begin
+        File.stat(server_dir)
+        sh "mv #{integration_temp_dir}/#{k} #{integration_tests_dir}"
+        sh "mv #{integration_temp_dir}/spec_helper.rb #{integration_tests_dir}"
+        sh "bundle exec kitchen verify #{k}"
+      rescue
+        puts "--- Server #{k} has no tests available, skipping"
+      ensure
+        sh "touch #{integration_tests_dir}/error"
+        sh "mv #{integration_tests_dir}/* #{integration_temp_dir}" 
+        
+      end
+    end
+  ensure
+    sh "mv #{integration_temp_dir}/* #{integration_tests_dir}" 
+    sh "rm -r #{integration_temp_dir[0..20]}"
+  end
+end
+
