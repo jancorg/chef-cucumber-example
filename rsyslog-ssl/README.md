@@ -1,5 +1,5 @@
 # rsyslog-ssl cookbook
-Cookbook para configurar rsyslog en modo cliente/servidor
+Server/Client rsyslog cookbook with ssl.
 # Requirements
 apt
 rsyslog
