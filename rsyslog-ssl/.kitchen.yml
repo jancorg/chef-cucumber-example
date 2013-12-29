@@ -1,0 +1,66 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+#provisioner: chef_zero
+provisioner: chef_solo
+
+
+platforms:
+- name: rsyslog-client-one
+  run_list:
+  - recipe[rsyslog-wrapper::client]
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    network:
+    - [private_network, ip: '10.2.3.12']
+    customize:
+      cpus: 2
+      memory: 1024
+
+- name: rsyslog-client-two
+  run_list:
+  - recipe[rsyslog-wrapper::client]
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    network:
+    - [private_network, ip: '110.2.3.13']
+    customize:
+      cpus: 2
+      memory: 1024
+
+- name: rsyslog-server
+  run_list:
+  - recipe[rsyslog-wrapper::server]
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    network:
+    - [private_network, ip: '10.2.3.11']
+    customize:
+      cpus: 2 
+      memory: 1024
+
+
+- name: localhost
+  run_list: 
+  - recipe[rsyslog-wrapper::localhost]
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    network:
+    - [private_network, ip: '10.2.3.14']
+    customize:
+      cpus: 2
+      memory: 1024
+
+
+
+suites:
+- name: default
+  run_list: []
+  attributes: {}
+
+
