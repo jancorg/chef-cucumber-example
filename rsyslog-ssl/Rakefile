@@ -12,6 +12,20 @@ task :chefspec do
 end
 
 
+desc "Read all servers from .kitchen.yml"
+task :read_servers do
+  require 'yaml'
+
+  kitchen_file=YAML.load_file('.kitchen.yml')
+  kitchen_file['platforms'].each do |s|
+    servers[s['name']] = {}
+      
+    servers[s['name']]['ip'] = s['driver_config']['network'].pop[1]['ip']
+    servers[s['name']]['runlist'] = s['run_list']
+  end 
+   
+end
+
 
 desc "Test Kitchen server per server moving folders and reading yaml file" 
  task :test_all do
