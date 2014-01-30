@@ -5,7 +5,7 @@ driver_config:
 #provisioner: chef_zero
 provisioner: chef_solo
 
-
+#To use platforms like this and is just quick integration with whole dev & test cycle
 platforms:
 - name: rsyslog-client-one
   run_list:
